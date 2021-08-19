@@ -84,18 +84,20 @@ class MNISTDataModule(pl.LightningDataModule):
     self.mnist_train, self.mnist_val = random_split(self.mnist_train, [55000, 5000])
 
   def train_dataloader(self):
-    return DataLoader(self.mnist_train, batch_size=64)
+    return DataLoader(self.mnist_train, batch_size=64, num_workers=4)
 
   def val_dataloader(self):
-    return DataLoader(self.mnist_val, batch_size=64)
+    return DataLoader(self.mnist_val, batch_size=64, num_workers=4)
 
   def test_dataloader(self):
-    return DataLoader(self.mnist_test, batch_size=64)
+    return DataLoader(self.mnist_test, batch_size=64, num_workers=4)
 
 
   # train
 model = MNISTClassifier()
 data_module = MNISTDataModule()
 trainer = pl.Trainer()
+# does your vm have gpu?
+#trainer = pl.Trainer(gpus=1)
 
 trainer.fit(model, data_module)
