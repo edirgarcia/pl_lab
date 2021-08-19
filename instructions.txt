@@ -1,0 +1,37 @@
+PyTorch Lightning Workshop.
+
+Come and create a VM.
+
+Then use VSCode where it says:
+
+JupyterLab Jupyter VsCode, launch VsCode and login.
+
+Navigate to Users directory
+cd Users
+(ls) make sure your alias exists...
+if for whatever reason does not exist create it: mkdir <alias>   ->    rm -d <alias> to delete
+
+Navigate yo your directory
+cd <alias>
+
+Clone the repo
+git clone https://github.com/edirgarcia/pl_lab.git
+
+Navigate to the pl_lab directory:
+cd pl_lab
+
+Here regular PyTorch trainer should run...
+
+What are we gonna do anyways?
+https://www.youtube.com/watch?v=gUF6WUq0Cf4
+
+Install lightning:
+pip install pytorch-lightning
+
+there's a weird bug so please run.
+pip install -U horovod
+
+Now, get to porting it over to lightning.
+
+...
+Are you an overacheiver, Experiment with Trainer() parameters, make your network convolutional.
