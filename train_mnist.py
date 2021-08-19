@@ -48,10 +48,16 @@ class MNISTClassifier(nn.Module):
 transform=transforms.Compose([transforms.ToTensor(), 
                               transforms.Normalize((0.1307,), (0.3081,))])
 
+# this has been adjusted to not have everyone download the data over and over during the workshop
+# Yann LeCunn's website is known to get a DoS and return http code 503
+# if you want to actually download this replace with:
+# mnist_source = os.getcwd()
+mnist_source = "/home/azureuser/cloudfiles/code"
+
 # ----------------
 # TRAINING, VAL DATA
 # ----------------
-mnist_train = MNIST(os.getcwd(), train=True, transform=transform, download=True)
+mnist_train = MNIST(mnist_source, train=True, transform=transform, download=True)
 
 # train (55,000 images), val split (5,000 images)
 mnist_train, mnist_val = random_split(mnist_train, [55000, 5000])
@@ -59,7 +65,7 @@ mnist_train, mnist_val = random_split(mnist_train, [55000, 5000])
 # ----------------
 # TEST DATA
 # ----------------
-mnist_test = MNIST(os.getcwd(), train=False, download=True)
+mnist_test = MNIST(mnist_source , train=False, download=True)
 
 # ----------------
 # DATALOADERS
