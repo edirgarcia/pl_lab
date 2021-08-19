@@ -70,10 +70,16 @@ class MNISTDataModule(pl.LightningDataModule):
     # transforms for images
     transform=transforms.Compose([transforms.ToTensor(), 
                                   transforms.Normalize((0.1307,), (0.3081,))])
+
+    # this has been adjusted to not have everyone download the data over and over during the workshop
+    # Yann LeCunn's website is known to get a DoS and return http code 503
+    # if you want to actually download this replace with:
+    # mnist_source = os.getcwd()
+    mnist_source = "/home/azureuser/cloudfiles/code"
       
     # prepare transforms standard to MNIST
-    self.mnist_train = MNIST(os.getcwd(), train=True, download=True, transform=transform)
-    self.mnist_test = MNIST(os.getcwd(), train=False, download=True, transform=transform)
+    self.mnist_train = MNIST(mnist_source, train=True, download=True, transform=transform)
+    self.mnist_test = MNIST(mnist_source, train=False, download=True, transform=transform)
     
     self.mnist_train, self.mnist_val = random_split(self.mnist_train, [55000, 5000])
 
